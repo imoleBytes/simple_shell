@@ -17,16 +17,38 @@ int main(int argc, char *argv[])
 
 		command[actual_command_size - 1] = '\0';
 
-		
 
-		char *const ar[] = {command, NULL};
+
 		if (strcmp(command, "exit") == 0)
 			return (0);
+
+		// tokenize
+
+		// char command[] = "My very eyes must just see under nine planet";
+
+		char *args[20]; //maximum 20 arguments
+		int i = 0; //j = 0;
+		char *token;
+
+		token = strtok((char *)command, " ");
+
+		while (token != NULL)
+		{
+			args[i] = token;
+			token = strtok(NULL, " ");
+			i++;
+		}
+		args[i] = NULL; // to terminate the array with NULL
+
+
+
+		// char *const ar[] = {command, NULL};
+		
 
 		pid = fork();
 
 		if (pid == 0)
-			execve(ar[0], ar, NULL);					
+			execve(args[0], args, NULL);					
 		waitpid(pid, &waitstatus, 0);
 
 	}
