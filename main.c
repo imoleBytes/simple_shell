@@ -14,9 +14,10 @@ int main(int argc, char *argv[])
 	{
 		displayPrompt();
 		actual_command_size = getline(&command, &max_command_size, stdin);
-		// printf("%lu\n", bytes);
+
 		command[actual_command_size - 1] = '\0';
-		// printf("%s\n", command);
+
+		
 
 		char *const ar[] = {command, NULL};
 		if (strcmp(command, "exit") == 0)
