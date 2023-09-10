@@ -34,7 +34,7 @@ int path(char **args)
         FILE *fp;
 
         if (compare(args[0], "exit"))
-		return (0);
+			return (0);
         path[0] = '\0';
         string_f(path, 2, "which ", args[0]);
         fp  = popen(path, "r");

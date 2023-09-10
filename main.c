@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 		}
 		args[i] = NULL; // to terminate the array with NULL
 		if (path(args))
-			printf("comand not found");
+			printf("comand not found\n");
 		else
 		{
 			pid = fork();
