@@ -39,14 +39,16 @@ int main(int argc, char *argv[])
 			i++;
 		}
 		args[i] = NULL; // to terminate the array with NULL
+		char *str = args[0];
 		if (path(args))
-			printf("comand not found");
+			printf("comand not found %s\n", args[0]);
 		else
 		{
 			pid = fork();
 			if (pid == 0)
-			execve(args[0], args, NULL);
-			waitpid(pid, &waitstatus, 0);
+				execve(args[0], args, environ);
+			else
+				waitpid(pid, &waitstatus, 0);
 		}
 	}
 

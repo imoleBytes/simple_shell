@@ -35,18 +35,12 @@ int path(char **args)
 
         if (compare(args[0], "exit"))
 		return (0);
-        path[0] = '\0';
-        string_f(path, 2, "which ", args[0]);
-        fp  = popen(path, "r");
-        if (fp == NULL)
-		return (2);
-        if (fgets(fullpath, sizeof(fullpath), fp) != NULL)
-        {
-                fullpath[strcspn(fullpath, "\n")] = '\0';
-                args[0] = fullpath;
-                pclose(fp);
-                return (0);
-        }
-        pclose(fp);
+	if (access(args[0], X_OK) == 0)
+		return (0);
+	if(!checkin_path(fullpath, args[0]))
+	{
+		args[0] = fullpath;
+		return (0);
+	}
 	return (2);
 }
