@@ -39,18 +39,15 @@ int main(int argc, char *argv[])
 			i++;
 		}
 		args[i] = NULL; // to terminate the array with NULL
-
-
-
-		// char *const ar[] = {command, NULL};
-		
-
-		pid = fork();
-
-		if (pid == 0)
-			execve(args[0], args, NULL);					
-		waitpid(pid, &waitstatus, 0);
-
+		if (path(args))
+			printf("comand not found");
+		else
+		{
+			pid = fork();
+			if (pid == 0)
+			execve(args[0], args, NULL);
+			waitpid(pid, &waitstatus, 0);
+		}
 	}
 
 	return (0);
