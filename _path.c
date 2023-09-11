@@ -13,40 +13,78 @@
  */
 int compare(char *s1, char *s2)
 {
-        if (s1 == NULL)
-                return (0);
-        while (*s1 != '\0' && *s2 != '\0')
-        {
-                if (*s1 != *s2)
-                        return (0);
-                s1++;
-                s2++;
-        }
-        if (*s1 == '\0' && *s2 == '\0')
-                return (1);
-        return (0);
+	if (s1 == NULL)
+		return (0);
+	while (*s1 != '\0' && *s2 != '\0')
+	{
+		if (*s1 != *s2)
+			return (0);
+		s1++;
+		s2++;
+	}
+	if (*s1 == '\0' && *s2 == '\0')
+		return (1);
+	return (0);
 }
-
+/**
+ * path - function handles path case
+ * @args: array of comands
+ * Return: int 0 for success
+ */
 int path(char **args)
 {
+	char path[1024], fullpath[10024];
+	FILE *fp;
 
-        char path[1024], fullpath[10024];
-        FILE *fp;
-
-        if (compare(args[0], "exit"))
+	if (compare(args[0], "exit"))
 		return (0);
-        path[0] = '\0';
-        string_f(path, 2, "which ", args[0]);
-        fp  = popen(path, "r");
-        if (fp == NULL)
-		return (2);
-        if (fgets(fullpath, sizeof(fullpath), fp) != NULL)
-        {
-                fullpath[strcspn(fullpath, "\n")] = '\0';
-                args[0] = fullpath;
-                pclose(fp);
-                return (0);
-        }
-        pclose(fp);
+	if (access(args[0], X_OK) == 0)
+		return (0);
+	if (!checkin_path(fullpath, args[0]))
+	{
+		args[0] = fullpath;
+		return (0);
+	}
+	print_error(args);
 	return (2);
+}
+/* strncmp will be chanaged */
+/**
+ * checkin_path - function gets path
+ * @buff: destination to save the full path
+ * @str: the comand to look for
+ * Return: 0 if found 1 if not found
+ */
+int checkin_path(char *buff, char *str)
+{
+	int i;
+	char *token, *path;
+
+	for (i = 0; environ[i] != NULL; i++)
+	{
+		if (strncmp(environ[i], "PATH=", 5) == 0)
+		{
+			path = strdup(environ[i] + 5);
+			token = strtok(path, ":");
+			while (token != NULL)
+			{
+				char fullpath[1000] = "";	
+				_concat(fullpath, token, 0);
+				_concat(fullpath, "/", strlen(fullpath));
+				_concat(fullpath, str, strlen(fullpath));
+
+				if (access(fullpath, X_OK) == 0)
+				{
+					_concat(buff, fullpath, 0);
+					free(path);
+					return (0);
+				}
+				token = strtok(NULL, ":");
+			}
+			free(path);
+			break;
+		}
+	       
+	}
+	return (1);
 }

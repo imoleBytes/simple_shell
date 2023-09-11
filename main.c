@@ -1,5 +1,26 @@
 #include "shell.h"
 
+char *program_name(char *str)
+{
+	static char *program = NULL;
+
+	if (program == NULL)
+		program = str;
+	return (program);
+}
+void comand_tokenize(char *command, char **args)
+{
+	int i = 0; //j = 0;
+	char *token;
+	token = strtok((char *)command, " ");
+	while (token != NULL)
+	{
+		args[i] = token;
+		token = strtok(NULL, " ");
+		i++;
+	}
+	args[i] = NULL;
+}
 
 int main(int argc, char *argv[])
 {
@@ -9,7 +30,8 @@ int main(int argc, char *argv[])
 	ssize_t actual_command_size;
 	pid_t pid;
 	int waitstatus;
-	
+
+        program_name(argv[0]);
 	while (1)
 	{
 		displayPrompt();
@@ -27,26 +49,15 @@ int main(int argc, char *argv[])
 		// char command[] = "My very eyes must just see under nine planet";
 
 		char *args[20]; //maximum 20 arguments
-		int i = 0; //j = 0;
-		char *token;
-
-		token = strtok((char *)command, " ");
-
-		while (token != NULL)
-		{
-			args[i] = token;
-			token = strtok(NULL, " ");
-			i++;
-		}
-		args[i] = NULL; // to terminate the array with NULL
-		if (path(args))
-			printf("comand not found");
-		else
+		comand_tokenize(command, args);
+		char *str = args[0];
+		if (!path(args))
 		{
 			pid = fork();
 			if (pid == 0)
-			execve(args[0], args, NULL);
-			waitpid(pid, &waitstatus, 0);
+				execve(args[0], args, environ);
+			else
+				waitpid(pid, &waitstatus, 0);
 		}
 	}
 
