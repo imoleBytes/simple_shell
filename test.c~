@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include "shell.h"
+char *get_program(char *str)
+{
+	char static *program = str;
+	return (program);
+}
+
+int main() {
+    char *program = "Abdi";
+    get_program(program);
+    char *result = get_program("som");
+    printf("Program name: %s\n", "abdi");
+
+    return 0;
+}
