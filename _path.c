@@ -33,8 +33,9 @@ int compare(char *s1, char *s2)
  */
 int path(char **args)
 {
-	char path[1024], fullpath[10024];
-	FILE *fp;
+	/*char path[1024], not used*/
+	char fullpath[10024];
+	/*FILE *fp; not used*/
 
 	if (compare(args[0], "exit"))
 		return (0);

@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <string.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
 extern char **environ;
 void string_f(char *dst, int argc, ...);
 void string_digit(int d, char *bf2);
@@ -15,4 +18,5 @@ void displayPrompt(void);
 int checkin_path(char *buff, char *str);
 void print_error(char **args);
 char *program_name(char *);
+
 #endif
