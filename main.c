@@ -35,7 +35,7 @@ void comand_tokenize(char *command, char **args)
 int main(int argc, char *argv[])
 {
 
-	char *command = NULL;
+	char *command = NULL, fullpath[1024];
 	size_t max_command_size = 0;
 	ssize_t actual_command_size;
 	pid_t pid;
@@ -54,8 +54,13 @@ int main(int argc, char *argv[])
 			from_pipe = true;
 		else
 			displayPrompt();
+		command = NULL;
 		actual_command_size = getline(&command, &max_command_size, stdin);
-
+		if (actual_command_size == -1)
+		{
+			free(command);
+			break;
+		}
 		command[actual_command_size - 1] = '\0';
 
 		/*this to fix the bug not empty command not looping*/
@@ -65,24 +70,27 @@ int main(int argc, char *argv[])
 		
 
 		comand_tokenize(command, args);
-		/* char *str = args[0];*/
+		fullpath[0] = '\0';
 		
 		if (strcmp(args[0], "exit") == 0)
 		{
+			free(command);
 			if (args[1] != NULL)
 				exit(atoi(args[1]));
 			exit(get_status(0, 0));
 		}
-		if (!path(args))
+		if (!path(args, fullpath))
 		{
 			pid = fork();
 			if (pid == 0)
-				execve(args[0], args, environ);
+				execve(fullpath, args, environ);
 			if (pid == -1)
 				exit(EXIT_FAILURE);
 			wait(NULL);
 			/* waitpid(pid, &waitstatus, 0);*/
 		}
+		if (command != NULL)
+			free(command);
 	}
 
 	return (0);

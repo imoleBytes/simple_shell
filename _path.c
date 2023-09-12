@@ -31,19 +31,17 @@ int compare(char *s1, char *s2)
  * @args: array of comands
  * Return: int 0 for success
  */
-int path(char **args)
+int path(char **args, char *fullpath)
 {
-	/*char path[1024], not used*/
-	char fullpath[10024];
-	/*FILE *fp; not used*/
-
 	if (compare(args[0], "exit"))
 		return (0);
 	if (access(args[0], X_OK) == 0)
+	{
+		_concat(fullpath, args[0], 0);
 		return (0);
+	}
 	if (!checkin_path(fullpath, args[0]))
 	{
-		args[0] = fullpath;
 		return (0);
 	}
 	print_error(args);
