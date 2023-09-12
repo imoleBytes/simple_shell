@@ -31,22 +31,21 @@ int compare(char *s1, char *s2)
  * @args: array of comands
  * Return: int 0 for success
  */
-int path(char **args)
+int path(char **args, char *fullpath)
 {
-	/*char path[1024], not used*/
-	char fullpath[10024];
-	/*FILE *fp; not used*/
-
 	if (compare(args[0], "exit"))
 		return (0);
 	if (access(args[0], X_OK) == 0)
+	{
+		_concat(fullpath, args[0], 0);
 		return (0);
+	}
 	if (!checkin_path(fullpath, args[0]))
 	{
-		args[0] = fullpath;
 		return (0);
 	}
 	print_error(args);
+	get_status(2, 2);
 	return (2);
 }
 /* strncmp will be chanaged */
@@ -66,7 +65,7 @@ int checkin_path(char *buff, char *str)
 		if (strncmp(environ[i], "PATH=", 5) == 0)
 		{
 			path = strdup(environ[i] + 5);
-			token = strtok(path, ":");
+			token = my_strtok(path, ":");
 			while (token != NULL)
 			{
 				char fullpath[1000] = "";	
@@ -80,7 +79,7 @@ int checkin_path(char *buff, char *str)
 					free(path);
 					return (0);
 				}
-				token = strtok(NULL, ":");
+				token = my_strtok(NULL, ":");
 			}
 			free(path);
 			break;

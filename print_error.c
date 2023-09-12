@@ -14,6 +14,11 @@ void print_error(char **args)
 		i++;
 
 	string_digit(i, digit);
-	string_f(buff, 6, program, ": ", digit, ": ",  args[0], ": not found\n");
+	_concat(buff, program, 0);
+	_concat(buff, ": ", _strlen(buff));
+	_concat(buff, digit, _strlen(buff));
+	_concat(buff, ": ", _strlen(buff));
+	_concat(buff, args[0], _strlen(buff));
+	_concat(buff, ": not found\n", _strlen(buff));
 	write(STDERR_FILENO, buff, strlen(buff));
 }
