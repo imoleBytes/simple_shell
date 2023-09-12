@@ -67,16 +67,13 @@ int main(int argc, char *argv[])
 		if (strcmp(command, "") == 0)
 			continue;
 
-		
-
 		comand_tokenize(command, args);
 		fullpath[0] = '\0';
 		
 		if (strcmp(args[0], "exit") == 0)
 		{
-			free(command);
 			if (args[1] != NULL)
-				exit(atoi(args[1]));
+				get_status(is_digit(args[1]), 2);
 			exit(get_status(0, 0));
 		}
 		if (!path(args, fullpath))
