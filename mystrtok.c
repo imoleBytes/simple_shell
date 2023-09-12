@@ -1,27 +1,32 @@
 #include <stdio.h>
+#include <string.h>
 
-char *my_strtok(char *str, char *dl)
+char *my_strtok(char *orginal, const char *delimiters)
 {
-	static char *str_copy;
-	static char token[1024];
-	int n = 0;
+	static char *cp;
+	char *token;
 
-	if (str != NULL)
-		str_copy = str;
-	while (*str_copy != '\0')
+	if (orginal != NULL)
+		cp = orginal;
+	if (cp == NULL || *cp == '\0')
+		return (NULL);
+	while (*cp != '\0' && strchr(delimiters, *cp) != NULL)
 	{
-		if (*str_copy == *dl)
-		{
-			str_copy++;
-			token[n++] = '\0';
-			return token;
-		}
-		token[n++] = *str_copy;
-		str_copy++;
+		cp++;
 	}
-	if (n > 0) {
-		token[n] = '\0';
-		return token;
+	if (*cp == '\0')
+		return (NULL);
+	token = cp;
+	while (*cp != '\0' && strchr(delimiters, *cp) == NULL)
+	{
+		cp++;
 	}
-	return (NULL);
+
+	if (*cp != '\0')
+	{
+		*cp = '\0';
+		cp++;
+	}
+	return (token);
 }
+

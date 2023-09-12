@@ -67,7 +67,7 @@ int checkin_path(char *buff, char *str)
 		if (strncmp(environ[i], "PATH=", 5) == 0)
 		{
 			path = strdup(environ[i] + 5);
-			token = strtok(path, ":");
+			token = my_strtok(path, ":");
 			while (token != NULL)
 			{
 				char fullpath[1000] = "";	
@@ -81,7 +81,7 @@ int checkin_path(char *buff, char *str)
 					free(path);
 					return (0);
 				}
-				token = strtok(NULL, ":");
+				token = my_strtok(NULL, ":");
 			}
 			free(path);
 			break;

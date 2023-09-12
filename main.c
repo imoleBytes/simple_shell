@@ -21,12 +21,12 @@ void comand_tokenize(char *command, char **args)
 	int i = 0;
 	char *token;
 
-	token = strtok((char *)command, " ");
+	token = my_strtok((char *)command, " ");
 
 	while (token != NULL)
 	{
 		args[i] = token;
-		token = strtok(NULL, " ");
+		token = my_strtok(NULL, " ");
 		i++;
 	}
 	args[i] = NULL;
