@@ -1,5 +1,30 @@
 #include "shell.h"
 
+int other_commands(char **args)
+{
+	if (compare(args[0], "cd"))
+	{
+		printf("CD will be handled later\n");
+		return (1);
+	}
+	if (compare(args[0], "setenv") || compare(args[0], "unsetenv"))
+	{
+		printf("setenv and unset will be handled later\n");
+		return (1);
+	}
+	if (compare(args[0], "echo") && compare(args[1], "$$"))
+	{
+		printf("$$ is not ready yet\n");
+		return (1);
+	}
+	if (compare(args[0], "echo") && compare(args[1], "$?"))
+	{
+		printf("$? is not ready yet\n");
+		return (1);
+	}
+	return (0);
+}
+
 int get_status(int new_status, int flag)
 {
 	static int status = 0;
@@ -25,6 +50,9 @@ void comand_tokenize(char *command, char **args)
 
 	while (token != NULL)
 	{
+		/* check if argument is # or starts at #*/
+		if (compare(token, "#") || *token == '#')
+			break;
 		args[i] = token;
 		token = my_strtok(NULL, " ");
 		i++;
@@ -75,6 +103,12 @@ int main(int argc, char *argv[])
 			if (args[1] != NULL)
 				get_status(is_digit(args[1]), 2);
 			exit(get_status(0, 0));
+		}
+		/** handle cases like $$ $? cd etc */
+		if (other_commands(args))
+		{
+			free(command);
+			continue;
 		}
 		if (!path(args, fullpath))
 		{

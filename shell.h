@@ -21,4 +21,5 @@ int get_status(int, int);
 char *my_strtok(char *, char *);
 int _strlen(char *);
 int is_digit(char *);
+int compare(char *, char *);
 #endif
