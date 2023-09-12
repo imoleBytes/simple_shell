@@ -22,4 +22,7 @@ char *my_strtok(char *, char *);
 int _strlen(char *);
 int is_digit(char *);
 int compare(char *, char *);
+
+void __execute(char *fullpath, char **args);
+
 #endif

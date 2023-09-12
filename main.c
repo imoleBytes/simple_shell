@@ -1,7 +1,11 @@
 #include "shell.h"
 
+
+
 int other_commands(char **args)
 {
+	pid_t pid;
+
 	if (compare(args[0], "cd"))
 	{
 		printf("CD will be handled later\n");
@@ -14,7 +18,9 @@ int other_commands(char **args)
 	}
 	if (compare(args[0], "echo") && compare(args[1], "$$"))
 	{
-		printf("$$ is not ready yet\n");
+		/* printf("$$ is not ready yet\n");*/
+		pid = getpid();
+		printf("%u\n", pid); /*to be replaced with write later*/
 		return (1);
 	}
 	if (compare(args[0], "echo") && compare(args[1], "$?"))
@@ -66,10 +72,12 @@ int main(int argc, char *argv[])
 	char *command = NULL, fullpath[1024];
 	size_t max_command_size = 0;
 	ssize_t actual_command_size;
-	pid_t pid;
-	/* int waitstatus;   not used*/
+	/*
+	*pid_t pid;
+	*int waitstatus;
+	*/
 	bool from_pipe = false;
-	char *args[20]; /*maximum 20 arguments*/
+	char *args[1024]; /*maximum 1024 arguments*/
 
 
 	(void) argc;
@@ -112,13 +120,16 @@ int main(int argc, char *argv[])
 		}
 		if (!path(args, fullpath))
 		{
-			pid = fork();
-			if (pid == 0)
-				execve(fullpath, args, environ);
-			if (pid == -1)
-				exit(EXIT_FAILURE);
-			wait(NULL);
-			/* waitpid(pid, &waitstatus, 0);*/
+			/*
+			* pid = fork();
+			* if (pid == 0)
+			*	execve(fullpath, args, environ);
+			* if (pid == -1)
+			*	exit(EXIT_FAILURE);
+			* //wait(NULL);
+			* waitpid(pid, &waitstatus, 0);
+			*/
+			__execute(fullpath, args);
 		}
 		if (command != NULL)
 			free(command);
@@ -126,5 +137,3 @@ int main(int argc, char *argv[])
 
 	return (0);
 }
-
-
