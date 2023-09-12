@@ -63,15 +63,16 @@ int main(int argc, char *argv[])
 			continue;
 
 		
-		if (strcmp(command, "exit") == 0)
+
+		comand_tokenize(command, args);
+		/* char *str = args[0];*/
+		
+		if (strcmp(args[0], "exit") == 0)
 		{
 			if (args[1] != NULL)
 				exit(atoi(args[1]));
 			exit(get_status(0, 0));
 		}
-
-		comand_tokenize(command, args);
-		/* char *str = args[0];*/
 		if (!path(args))
 		{
 			pid = fork();

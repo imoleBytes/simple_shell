@@ -18,4 +18,5 @@ int checkin_path(char *buff, char *str);
 void print_error(char **args);
 char *program_name(char *);
 int get_status(int, int);
+char *my_strtok(char *, char *);
 #endif
