@@ -1,5 +1,13 @@
 #include "shell.h"
 
+int get_status(int new_status, int flag)
+{
+	static int status = 0;
+	if(flag)
+		status = new_status;
+	return (status);
+}
+
 char *program_name(char *str)
 {
 	static char *program = NULL;
@@ -38,6 +46,7 @@ int main(int argc, char *argv[])
 
 	(void) argc;
 	program_name(argv[0]);
+	get_status(0, 0);
 	while (!from_pipe && 1)
 	{
 		/*ths is to check if command is piped into our program*/
@@ -53,13 +62,13 @@ int main(int argc, char *argv[])
 		if (strcmp(command, "") == 0)
 			continue;
 
-		/*
-		* if (strcmp(command, "exit") == 0)
-		*	return (0);
-		*/
-
+		
 		if (strcmp(command, "exit") == 0)
-			exit(EXIT_SUCCESS);
+		{
+			if (args[1] != NULL)
+				exit(atoi(args[1]));
+			exit(get_status(0, 0));
+		}
 
 		comand_tokenize(command, args);
 		/* char *str = args[0];*/
@@ -77,3 +86,5 @@ int main(int argc, char *argv[])
 
 	return (0);
 }
+
+
