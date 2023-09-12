@@ -1,5 +1,5 @@
 #include "shell.h"
-
+#include <stdlib.h>
 char *program_name(char *str)
 {
 	static char *program = NULL;
@@ -7,6 +7,13 @@ char *program_name(char *str)
 	if (program == NULL)
 		program = str;
 	return (program);
+}
+int get_status(int new_status, int flag)
+{
+	static int status = 0;
+	if(flag)
+		status = new_status;
+	return (status);
 }
 void comand_tokenize(char *command, char **args)
 {
@@ -31,25 +38,26 @@ int main(int argc, char *argv[])
 	pid_t pid;
 	int waitstatus;
 
-        program_name(argv[0]);
+	program_name(argv[0]);
+	get_status(0, 0);
 	while (1)
 	{
 		displayPrompt();
 		actual_command_size = getline(&command, &max_command_size, stdin);
 
 		command[actual_command_size - 1] = '\0';
-
-
-
-		if (strcmp(command, "exit") == 0)
-			return (0);
-
 		// tokenize
 
 		// char command[] = "My very eyes must just see under nine planet";
 
 		char *args[20]; //maximum 20 arguments
 		comand_tokenize(command, args);
+		if (strcmp(command, "exit") == 0)
+		{
+			if (args[1] != NULL)
+				exit(atoi(args[1]));
+			exit(get_status(0, 0));
+		}
 		char *str = args[0];
 		if (!path(args))
 		{

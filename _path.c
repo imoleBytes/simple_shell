@@ -46,6 +46,7 @@ int path(char **args)
 		return (0);
 	}
 	print_error(args);
+	get_status(2, 2);
 	return (2);
 }
 /* strncmp will be chanaged */

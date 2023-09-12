@@ -1,7 +1,6 @@
 #ifndef _shell_h
 #define _shell_h
 
-
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/wait.h>
@@ -15,4 +14,5 @@ void displayPrompt(void);
 int checkin_path(char *buff, char *str);
 void print_error(char **args);
 char *program_name(char *);
+int get_status(int, int);
 #endif
