@@ -5,6 +5,7 @@
 int other_commands(char **args)
 {
 	pid_t pid;
+	char intonum[100];
 
 	if (compare(args[0], "cd"))
 	{
@@ -20,7 +21,10 @@ int other_commands(char **args)
 	{
 		/* printf("$$ is not ready yet\n");*/
 		pid = getpid();
-		printf("%u\n", pid); /*to be replaced with write later*/
+		intToStr(intonum, pid, 10, 0);
+
+		write(STDOUT_FILENO, intonum, strlen(intonum));
+		__putc('\n');
 		return (1);
 	}
 	if (compare(args[0], "echo") && compare(args[1], "$?"))

@@ -24,5 +24,7 @@ int is_digit(char *);
 int compare(char *, char *);
 
 void __execute(char *fullpath, char **args);
+char *intToStr(char *a, int num, int base, int upper);
+int __putc(char c);
 
 #endif
