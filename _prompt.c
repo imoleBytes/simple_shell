@@ -3,7 +3,7 @@
 
 void displayPrompt(void)
 {
-	char *prompt = "=>$ ";
+	char *prompt = "$ ";
 
-	write(1, prompt, 4);
+	write(1, prompt, 2);
 }
