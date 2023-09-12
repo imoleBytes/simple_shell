@@ -8,6 +8,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#define BUFSZE 1024
+
 extern char **environ;
 void string_f(char *dst, int argc, ...);
 void string_digit(int d, char *bf2);
@@ -26,5 +28,14 @@ int compare(char *, char *);
 void __execute(char *fullpath, char **args);
 char *intToStr(char *a, int num, int base, int upper);
 int __putc(char c);
+ssize_t _getline(char **lptr, size_t *n, FILE *stream);
+void var_line(char **lptr, size_t *n, char *buffer, size_t j);
+void *_realloc(void *ptr, unsigned int old, unsigned int newp);
+void mem_cpy(void *newptr, const void *ptr, unsigned int size);
+char *str_cpy(char *dest, char *src);
+
+
+
+
 
 #endif

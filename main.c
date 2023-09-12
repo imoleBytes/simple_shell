@@ -95,7 +95,8 @@ int main(int argc, char *argv[])
 		else
 			displayPrompt();
 		command = NULL;
-		actual_command_size = getline(&command, &max_command_size, stdin);
+		/* actual_command_size = getline(&command, &max_command_size, stdin);*/
+		actual_command_size = _getline(&command, &max_command_size, stdin);
 		if (actual_command_size == -1)
 		{
 			free(command);
