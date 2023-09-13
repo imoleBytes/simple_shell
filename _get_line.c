@@ -30,7 +30,7 @@ ssize_t _getline(char **lptr, size_t *n, FILE *stream)
 	while (t != '\n')
 	{
 		i = read(STDIN_FILENO, &t, 1);
-		// if (i == -1 || (i == 0 && word == 0))
+		/* if (i == -1 || (i == 0 && word == 0))*/
 		if ((i == 0 && word == 0) || i == -1)
 		{
 			free(buffer);

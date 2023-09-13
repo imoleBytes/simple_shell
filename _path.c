@@ -29,6 +29,7 @@ int compare(char *s1, char *s2)
 /**
  * path - function handles path case
  * @args: array of comands
+ * @fullpath: path
  * Return: int 0 for success
  */
 int path(char **args, char *fullpath)
@@ -68,7 +69,8 @@ int checkin_path(char *buff, char *str)
 			token = my_strtok(path, ":");
 			while (token != NULL)
 			{
-				char fullpath[1000] = "";	
+				char fullpath[1000] = "";
+
 				_concat(fullpath, token, 0);
 				_concat(fullpath, "/", strlen(fullpath));
 				_concat(fullpath, str, strlen(fullpath));
@@ -84,7 +86,7 @@ int checkin_path(char *buff, char *str)
 			free(path);
 			break;
 		}
-	       
+
 	}
 	return (1);
 }
