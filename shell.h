@@ -33,7 +33,7 @@ char *intToStr(char *a, int num, int base, int upper);
 int __putc(char c);
 ssize_t _getline(char **lptr, size_t *n, FILE *stream);
 void var_line(char **lptr, size_t *n, char *buffer, size_t j);
-void *_realloc(void *ptr, unsigned int old, unsigned int newp);
+void *_re_alloc(void *ptr, unsigned int newpt, unsigned int old);
 void mem_cpy(void *newptr, const void *ptr, unsigned int size);
 char *str_cpy(char *dest, char *src);
 int readFile(char *filename, char **comand);
