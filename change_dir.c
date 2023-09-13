@@ -31,7 +31,7 @@ void change_dir(char **args)
         else
         {
 		program = program_name(NULL);
-                string_f(errorm, 5, program, ": 1: ", args[0], ":  can't cd to ", args[1]);
+                string_f(errorm, 6, program, ": 1: ", args[0], ":  can't cd to ", args[1], "\n");
                 write(STDERR_FILENO, errorm, _strlen(errorm));
 		get_status(2, 2);
         }

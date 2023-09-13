@@ -25,7 +25,7 @@ int _strlen(char *s)
  */
 void _concat(char *bf, char *str1, int  n)
 {
-	while (*str1 != '\0' && n < 10024)
+	while (*str1 != '\0')
 	{
 		*(bf + n) = *str1;
 		str1++;
