@@ -1,5 +1,7 @@
 #include "shell.h"
 
+
+
 int other_commands(char **args)
 {
 	pid_t pid;
@@ -57,17 +59,18 @@ int main(int argc, char *argv[])
 		else
 			displayPrompt();
 		command = NULL;
-		/* actual_command_size = getline(&command, &max_command_size, stdin);*/
+		/* check if argument passed */
 		if (argc < 2)
 			actual_command_size = _getline(&command, &max_command_size, stdin);
 		else
 		{
+			/* if argument read the file*/
 			actual_command_size = readFile(argv[1], &command);
 			flag = true;
 		}
 		if (actual_command_size == -1)
 		{
-			get_status(2, 2);
+			getstatus(2, 2);
 			free(command);
 			break;
 		}
@@ -90,7 +93,7 @@ int main(int argc, char *argv[])
 			__execute(fullpath, args);
 		if (command != NULL)
 			free(command);
-		/* if file passed stop loop */
+		/* 
 		if (flag)
 			break;
 	}

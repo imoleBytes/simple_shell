@@ -11,6 +11,9 @@
 #define BUFSZE 1024
 
 extern char **environ;
+void change_dir(char **args);
+int get_status(int new_status, int flag);
+void comand_tokenize(char *command, char **args);
 void string_f(char *dst, int argc, ...);
 void string_digit(int d, char *bf2);
 void _concat(char *bf, char *str1, int  n);
@@ -33,7 +36,7 @@ void var_line(char **lptr, size_t *n, char *buffer, size_t j);
 void *_realloc(void *ptr, unsigned int old, unsigned int newp);
 void mem_cpy(void *newptr, const void *ptr, unsigned int size);
 char *str_cpy(char *dest, char *src);
-
+int readFile(char *filename, char **comand);
 
 
 

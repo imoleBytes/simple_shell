@@ -12,5 +12,13 @@ void __execute(char *fullpath, char **args)
 		exit(EXIT_FAILURE);
 	/* parent process*/
 	/*wait(NULL);*/	
-	waitpid(pid, &waitstatus, 0);
+	else
+	{
+		waitpid(pid, &waitstatus, 0);
+		if (WIFEXITED(waitstatus))
+		{
+			int status = (waitstatus > 0) ? 2 : waitstatus;
+			get_status(status, 2);
+		}
+	}
 }

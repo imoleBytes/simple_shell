@@ -33,7 +33,7 @@ int compare(char *s1, char *s2)
  */
 int path(char **args, char *fullpath)
 {
-	if (compare(args[0], "exit"))
+	if (compare(args[0], "exit") || compare(args[0], "cd"))
 		return (0);
 	if (access(args[0], X_OK) == 0)
 	{
