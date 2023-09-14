@@ -10,16 +10,15 @@ void start_at(char *str)
 }
 int check_empty(char *str)
 {
-
-    while (*str != '\0') {
-        if (*str != ' ' && *str != '\n') 
-        {
-            return 1;
-        }
-        str++;
-    }
-    
-    return 0; 
+	while (*str != '\0')
+	{
+		if (*str != ' ' && *str != '\n')
+		{
+			return 1;
+		}
+		str++;
+	}
+	return 0;
 }
 void process(char **args, char *command, char *orginal_command)
 {
@@ -120,11 +119,13 @@ int main(int argc, char *argv[])
 			free(command);
 			continue;
 		}
+
+		/* handle cases &&, ;, and || */
 		tokenize_lines(command, lines);
 		for (j = 0; lines[j] != NULL; j++)
 		{
-			start_at(lines[j]);
-			if (!check_empty(lines[j]))
+			start_at(lines[j]); /* trying to handles in case command starts like &&ls or ;ls to rpint error but not working yet*/
+			if (!check_empty(lines[j])) /* I noticed that there is segment fault when empty spaces passed, so this handles */ 
 			{
 				free(lines[j]);
 				continue;
@@ -132,6 +133,7 @@ int main(int argc, char *argv[])
 			process(args, lines[j], command);
 			free(lines[j]);
 		}
+		
 		if (command != NULL)
 			free(command);
 		/* if file passed stop loop */
