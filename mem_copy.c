@@ -1,7 +1,7 @@
 /**
  * mem_cpy - copies information between void pointers.
  * @newptr: destination pointer.
- * @ptr: source pointer.
+ * @pter: source pointer.
  * @size: size of the new pointer.
  *
  * Return: no return.

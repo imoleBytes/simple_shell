@@ -4,38 +4,38 @@
  * _realloc - reallocates a memory block.
  * @ptr: pointer to the memory previously allocated.
  * @old: size, in bytes, of the allocated space of ptr.
- * @new: new size, in bytes, of the new memory block.
+ * @newpt: new size, in bytes, of the new memory block.
  *
  * Return: ptr.
  * if new == old, returns ptr without changes.
  * if malloc fails, returns NULL.
  */
-void *_realloc(void *ptr, unsigned int old, unsigned int new)
+void *_re_alloc(void *ptr, unsigned int newpt, unsigned int old)
 {
 	void *newptr;
 
 	if (ptr == NULL)
-		return (malloc(new));
+		return (malloc(newpt));
 
-	if (new == 0)
+	if (newpt == 0)
 	{
 		free(ptr);
 		return (NULL);
 	}
 
-	if (new == old)
+	if (newpt == old)
 		return (ptr);
 
-	newptr = malloc(new);
+	newptr = malloc(newpt);
 	if (newptr == NULL)
 		return (NULL);
 
-	if (new < old)
+	if (newpt < old)
 		/*_memcpy(newptr, ptr, new);*/
-		mem_cpy(newptr, ptr, new);
+		mem_cpy(newptr, ptr, newpt);
 	else
 		/*_memcpy(newptr, ptr, old);*/
-		mem_cpy(newptr, ptr, new);
+		mem_cpy(newptr, ptr, newpt);
 
 	free(ptr);
 	return (newptr);
