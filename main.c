@@ -1,5 +1,43 @@
 #include "shell.h"
+void start_at(char *str)
+{
+	if (*str == ';' || *str == '|' || *str == '&')
+	{
+		free(str);
+		printf("error\n");
+		exit(2);
+	}
+}
+int check_empty(char *str)
+{
 
+    while (*str != '\0') {
+        if (*str != ' ' && *str != '\n') 
+        {
+            return 1;
+        }
+        str++;
+    }
+    
+    return 0; 
+}
+void process(char **args, char *command, char *orginal_command)
+{
+	char fullpath[1024];
+	
+		comand_tokenize(command, args);
+		fullpath[0] = '\0';
+		if (compare(args[0], "exit"))
+		{
+			if (args[1] != NULL)
+				get_status(is_digit(args[1]), 2);
+			free(command);
+			free(orginal_command);
+			exit(get_status(0, 0));
+		}
+		if (!other_commands(args) && !path(args, fullpath))
+			__execute(fullpath, args);
+}
 int other_commands(char **args)
 {
 	pid_t pid;
@@ -36,9 +74,10 @@ int other_commands(char **args)
 int main(int argc, char *argv[])
 {
 
-	char *command = NULL, fullpath[1024];
+	char *command = NULL, *lines[1024];
 	size_t max_command_size = 0;
 	ssize_t actual_command_size;
+	int j;
 	/*
 	*pid_t pid;
 	*int waitstatus;
@@ -76,21 +115,27 @@ int main(int argc, char *argv[])
 		/*this to fix the bug not empty command not looping*/
 		if (strcmp(command, "") == 0)
 			continue;
-		comand_tokenize(command, args);
-		fullpath[0] = '\0';
-		if (compare(args[0], "exit"))
+		if (!check_empty(command))
 		{
-			if (args[1] != NULL)
-				get_status(is_digit(args[1]), 2);
 			free(command);
-			exit(get_status(0, 0));
+			continue;
 		}
-		
-		if (!other_commands(args) && !path(args, fullpath))
-			__execute(fullpath, args);
+		tokenize_lines(command, lines);
+		for (j = 0; lines[j] != NULL; j++)
+		{
+			start_at(lines[j]);
+			if (!check_empty(lines[j]))
+			{
+				free(lines[j]);
+				continue;
+			}
+			process(args, lines[j], command);
+			free(lines[j]);
+		}
 		if (command != NULL)
 			free(command);
 		/* if file passed stop loop */
+		
 		if (flag)
 			break;
 	}

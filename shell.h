@@ -9,7 +9,8 @@
 #include <stdlib.h>
 
 #define BUFSZE 1024
-
+int other_commands(char **args);
+int tokenize_lines(char *str1, char **lines);
 extern char **environ;
 void change_dir(char **args);
 int get_status(int new_status, int flag);
