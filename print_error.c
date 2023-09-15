@@ -3,6 +3,7 @@
 #include <unistd.h>
 
 /**
+ * print_error - function prints error
  * @args: array of comands
  */
 void print_error(char **args)

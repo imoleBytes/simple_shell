@@ -1,1 +1,4 @@
 ls -l
+ls
+ls
+ls

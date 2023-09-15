@@ -1,5 +1,9 @@
 #include "shell.h"
-
+/**
+ *  __execute - function excutes comand
+ * @fullpath: string contains fullpath
+ * @args: comands of array
+ */
 void __execute(char *fullpath, char **args)
 {
 	pid_t pid;
@@ -11,13 +15,14 @@ void __execute(char *fullpath, char **args)
 	if (pid == -1)
 		exit(EXIT_FAILURE);
 	/* parent process*/
-	/*wait(NULL);*/	
+	/*wait(NULL);*/
 	else
 	{
 		waitpid(pid, &waitstatus, 0);
 		if (WIFEXITED(waitstatus))
 		{
 			int status = (waitstatus > 0) ? 2 : waitstatus;
+
 			get_status(status, 2);
 		}
 	}

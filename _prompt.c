@@ -1,6 +1,8 @@
 #include "shell.h"
 
-
+/**
+ * displayPrompt - function stdout
+ */
 void displayPrompt(void)
 {
 	char *prompt = "$ ";

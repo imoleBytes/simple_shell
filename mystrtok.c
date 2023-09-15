@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <string.h>
-
+/**
+ * my_strtok - funtion tokenizes
+ * @orginal: otginal string
+ * @delimiters: delimiter
+ * Return: char token
+ */
 char *my_strtok(char *orginal, const char *delimiters)
 {
 	static char *cp;
