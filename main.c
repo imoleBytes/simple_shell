@@ -133,6 +133,7 @@ int main(int argc, char *argv[])
 		}
 		if (actual_command_size == -1)
 		{
+			free(command);
 			get_status(2, 2);
 			break;
 		}

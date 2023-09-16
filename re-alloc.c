@@ -35,7 +35,7 @@ void *_re_alloc(void *ptr, unsigned int newpt, unsigned int old)
 		mem_cpy(newptr, ptr, newpt);
 	else
 		/*_memcpy(newptr, ptr, old);*/
-		mem_cpy(newptr, ptr, newpt);
+		mem_cpy(newptr, ptr, old);
 
 	free(ptr);
 	return (newptr);

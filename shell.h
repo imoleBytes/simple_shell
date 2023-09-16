@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#define BUFSZE 1024
+#define BUFSZE 10024
 int other_commands(char **args);
 int tokenize_lines(char *str1, char **lines);
 extern char **environ;
