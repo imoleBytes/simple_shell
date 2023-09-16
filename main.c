@@ -134,7 +134,6 @@ int main(int argc, char *argv[])
 		if (actual_command_size == -1)
 		{
 			get_status(2, 2);
-			free(command);
 			break;
 		}
 		command[actual_command_size - 1] = '\0';
