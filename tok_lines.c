@@ -5,10 +5,10 @@
 #include "shell.h"
 
 /**
- * getlines - function gets lines for cases ; && |
- * @command: the input
- * @dl: array that stores delemeter
- */
+* getlines - function gets lines for cases ; && |
+* @command: the input
+* @dl: array that stores delemeter
+*/
 void getlines(char *command, char **dl)
 {
 	while (*command)
@@ -37,11 +37,11 @@ void getlines(char *command, char **dl)
 	}
 }
 /**
- * tokenize_lines - function name
- * @str1: the string to tokenize
- * @lines: array stores lines of commands
- * Return: 0 all time
- */
+* tokenize_lines - function name.
+* @str1: the string to tokenize
+* @lines: array stores lines of commands
+* Return: 0 all time
+*/
 int tokenize_lines(char *str1, char **lines)
 {
 	char *str = str1;
@@ -64,4 +64,3 @@ int tokenize_lines(char *str1, char **lines)
 	lines[i] = NULL;
 	return (0);
 }
-

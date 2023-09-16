@@ -22,7 +22,7 @@ int get_status(int new_status, int flag)
  */
 char *program_name(char *str)
 {
-	static char *program;;
+	static char *program;
 
 	if (program == NULL)
 		program = str;
