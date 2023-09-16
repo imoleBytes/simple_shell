@@ -54,7 +54,7 @@ int tokenize_lines(char *str1, char **lines)
 	token = my_strtok(str_copy, dl);
 	while (token != NULL)
 	{
-		str = str + strlen(token) + 1;
+		str = str + _strlen(token) + 1;
 		lines[i] = strdup(token);
 		getlines(str, &dl);
 		token = my_strtok(NULL, dl);

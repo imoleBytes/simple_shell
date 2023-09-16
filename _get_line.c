@@ -42,7 +42,6 @@ ssize_t _getline(char **lptr, size_t *n, FILE *stream)
 		}
 		if (word >= BUFSZE)
 			buffer = _re_alloc(buffer, word + 1, word);
-			/* buffer = realloc(buffer, word, word + 1);*/
 		buffer[word] = t;
 		word++;
 	}

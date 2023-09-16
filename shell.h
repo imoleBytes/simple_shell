@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 #define BUFSZE 1024
 int other_commands(char **args);
