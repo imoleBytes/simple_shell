@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <string.h>
+#include "shell.h"
+
 
 /**
  * readFile - function reads file
@@ -32,5 +29,5 @@ int readFile(char *filename, char **comand)
 	}
 	buff[bytes] = '\0';
 	*comand = strdup(buff);
-	return (strlen(*comand));
+	return (_strlen(*comand));
 }

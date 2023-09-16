@@ -1,9 +1,10 @@
 /**
- * *str_cpy - Copies the string pointed to by src.
- * @dest: Type char pointer the dest of the copied str
- * @src: Type char pointer the source of str
- * Return: the dest.
- */
+* *str_cpy - Copies the string pointed to by src.
+* @dest: pointer to the dest of the copied string
+* @src: pointer to the source of string
+* Return: the dest.
+*/
+
 char *str_cpy(char *dest, char *src)
 {
 
@@ -17,6 +18,3 @@ char *str_cpy(char *dest, char *src)
 
 	return (dest);
 }
-
-
-
