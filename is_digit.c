@@ -24,7 +24,6 @@ int is_digit(char *str)
 			write(STDERR_FILENO, err, _strlen(err));
 			return (2);
 		}
-		
 		str++;
 	}
 	return (result * flag);

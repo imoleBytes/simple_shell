@@ -44,10 +44,36 @@ void comand_tokenize(char *command, char **args)
 	{
 		/* check if argument is # or starts at #*/
 		if (compare(token, "#") || *token == '#')
+		{
+			args[i] = NULL;
 			break;
+		}
 		args[i] = token;
 		token = my_strtok(NULL, " ");
 		i++;
 	}
 	args[i] = NULL;
+}
+
+/**
+ * process - function helps main
+ *@args: array of commands
+ *@command: comand input
+ *@orginal_command: to free incase
+ */
+void process(char **args, char *command, char *orginal_command)
+{
+	char fullpath[1024];
+
+	comand_tokenize(command, args);
+	fullpath[0] = '\0';
+	if (compare(args[0], "exit"))
+	{
+		if (args[1] != NULL)
+			get_status(is_digit(args[1]), 2);
+		(void)orginal_command;
+		exit(get_status(0, 0));
+	}
+	if (!other_commands(args) && !path(args, fullpath))
+		__execute(fullpath, args);
 }

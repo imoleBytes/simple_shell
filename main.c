@@ -2,49 +2,29 @@
 
 
 /**
- * check_empty - function name
- * @str1: string to  check
- * Return: int
+ * non_inter_active_mode - function
+ * @commands: commands
+ * @command: command
  */
-int check_empty(char *str1)
+void non_inter_active_mode(char *commands, char *command)
 {
-	char *str = str1;
+	ssize_t actual_command_size = 0;
+	size_t max_command_size = 0;
 
-	if (compare(str, ""))
-		return (0);
-	while (*str != '\0')
+	actual_command_size = getline(&commands, &max_command_size, stdin);
+	while (actual_command_size > -1)
 	{
-		if (*str != ' ' && *str != '\n')
+		if (!check_empty(commands))
 		{
-			return (1);
+			free(commands);
+			continue;
 		}
-		str++;
+		_concat(command, commands, strlen(command));
+		free(commands);
+		commands = NULL;
+		actual_command_size = getline(&commands, &max_command_size, stdin);
 	}
-	free(str1);
-	return (0);
-}
-/**
- * process - function helps main
- *@args: array of commands
- *@command: comand input
- *@orginal_command: to free incase
- */
-void process(char **args, char *command, char *orginal_command)
-{
-	char fullpath[1024];
-
-	comand_tokenize(command, args);
-	fullpath[0] = '\0';
-	if (compare(args[0], "exit"))
-	{
-		if (args[1] != NULL)
-			get_status(is_digit(args[1]), 2);
-		free(command);
-		free(orginal_command);
-		exit(get_status(0, 0));
-	}
-	if (!other_commands(args) && !path(args, fullpath))
-		__execute(fullpath, args);
+	command[_strlen(command) - 1] = '\0';
 }
 /**
  * other_commands - function handles othe command
@@ -58,7 +38,6 @@ int other_commands(char **args)
 
 	if (compare(args[0], "cd"))
 	{
-		/* direcory will be changed you can try pwd after changing it*/
 		change_dir(args);
 		return (1);
 	}
@@ -100,20 +79,41 @@ void handle_lines(char **args, char **lines, char *command)
 		free(lines[j]);
 	}
 }
+
+/**
+ * active_mode - function
+ * @commands: commands
+ * @command: command
+ */
+
+void active_mode(char *commands, char *command)
+{
+	ssize_t actual_command_size = 0;
+	size_t max_command_size = 0;
+
+	actual_command_size = getline(&commands, &max_command_size, stdin);
+	if (actual_command_size > -1)
+	{
+		commands[actual_command_size] = '\0';
+		_concat(command, commands, 0);
+		free(commands);
+		commands = NULL;
+	}
+}
+
 /**
  * main - main function
  * @argc: size
  * @argv: arrray
  * Return: int
  */
+
 int main(int argc, char *argv[])
 {
-
-	char *command = NULL, *lines[1024];
-	size_t max_command_size = 0;
-	ssize_t actual_command_size;
-	bool from_pipe = false, flag = false;
+	char command[1000] = "", *commands, *lines[1024];
+	bool from_pipe = false;
 	char *args[1024]; /*maximum 1024 arguments*/
+	ssize_t actual_command_size;
 
 	program_name(argv[0]);
 	get_status(0, 0);
@@ -123,29 +123,31 @@ int main(int argc, char *argv[])
 			from_pipe = true;
 		else
 			displayPrompt();
-		command = NULL;
+		commands = NULL;
 		if (argc < 2)
-			actual_command_size = _getline(&command, &max_command_size, stdin);
+		{
+			if (!from_pipe)
+				active_mode(commands, command);
+			else
+				non_inter_active_mode(commands, command);
+		}
 		else
 		{
-			actual_command_size = readFile(argv[1], &command);
-			flag = true;
+			actual_command_size = readFile(argv[1], &commands);
+			from_pipe = true;
+			if (actual_command_size == -1)
+			{
+				free(commands);
+				continue;
+			}
+			_concat(command, commands, 0);
 		}
-		if (actual_command_size == -1)
-		{
-			free(command);
-			get_status(2, 2);
-			break;
-		}
-		command[actual_command_size - 1] = '\0';
 		if (!check_empty(command))
 			continue;
 		tokenize_lines(command, lines);
 		handle_lines(args, lines, command);
-		if (command != NULL)
-			free(command);
-		if (flag)
-			break;
+		if (commands != NULL)
+			free(commands);
 	}
-	return (0);
+	exit(get_status(0, 0));
 }

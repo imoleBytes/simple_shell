@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include "shell.h"
+int main(int argc, char *argv[]) {
+    char *line = NULL;
+    size_t line_size = 0;
+    ssize_t read_size;
+    bool from_pipe = false, flag = false;
+
+
+
+
+    while (!from_pipe && 1) {
+        if (isatty(STDIN_FILENO) == 0)
+            from_pipe = true;
+        else
+
+
+        while ((read_size = getline(&line, &line_size, stdin)) != -1) {
+            // Print the line just read
+            printf("%s", line);
+
+            if (read_size == 1 && line[0] == '\n')
+                continue;
+
+            if (flag)
+                break;
+        }
+
+        if (flag)
+            break;
+    }
+
+ 
+    free(line);
+
+    return 0;
+}

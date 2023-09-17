@@ -45,11 +45,17 @@ void getlines(char *command, char **dl)
 int tokenize_lines(char *str1, char **lines)
 {
 	char *str = str1;
-	char *str_copy = strdup(str);
+	char *str_copy;
 	char *token;
 	char *dl = ";";
 	int i = 0;
 
+	if (*str == '#')
+	{
+		lines[0] = NULL;
+		return (0);
+	}
+	str_copy = strdup(str);
 	getlines(str, &dl);
 	token = my_strtok(str_copy, dl);
 	while (token != NULL)

@@ -12,6 +12,8 @@
 #define BUFSZE 10024
 int other_commands(char **args);
 int tokenize_lines(char *str1, char **lines);
+int check_empty(char *str1);
+void process(char **args, char *command, char *orginal_command);
 extern char **environ;
 void change_dir(char **args);
 int get_status(int new_status, int flag);
