@@ -20,7 +20,7 @@ void non_inter_active_mode(char *commands, char *command)
 			commands = NULL;
 			continue;
 		}
-		_concat(command, commands, strlen(command));
+		_concat(command, commands, _strlen(command));
 		free(commands);
 		commands = NULL;
 		actual_command_size = _getline(&commands, &max_command_size, stdin);

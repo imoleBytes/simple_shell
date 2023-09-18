@@ -1,15 +1,14 @@
 #include "shell.h"
 
 /**
- * _re_alloc - reallocates a memory block.
- * @ptr: pointer to the memory previously allocated.
- * @old: size, in bytes, of the allocated space of ptr.
- * @newpt: new size, in bytes, of the new memory block.
- *
- * Return: (void) ptr.
- * if new == old, returns ptr without changes.
- * if malloc fails, returns NULL.
- */
+* _re_alloc - this func reallocates a memory.
+* @ptr: pointer to the memory allocated previously.
+* @old: size of the allocated space.
+* @newpt: new size (bytes) of the new memory.
+*
+* Return: (void) ptr.
+*/
+
 void *_re_alloc(void *ptr, unsigned int newpt, unsigned int old)
 {
 	void *newptr;
