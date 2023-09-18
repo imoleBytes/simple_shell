@@ -1,10 +1,10 @@
 #include "shell.h"
 #include <stdio.h>
 /**
- * is_digit - function checks if string is digit
- * @str: string as paramater
- * Return: the digit in string or 2 if all not digit
- */
+* is_digit - function checks if string is digit
+* @str: string as paramater
+* Return: the digit in string or 2 if all not digit
+*/
 int is_digit(char *str)
 {
 	char result, flag = 1;

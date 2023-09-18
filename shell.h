@@ -21,6 +21,8 @@ void comand_tokenize(char *command, char **args);
 void string_f(char *dst, int argc, ...);
 void string_digit(int d, char *bf2);
 void _concat(char *bf, char *str1, int  n);
+char *_strdup(char *str);
+char *_strchr(char *s, char c);
 int path(char **, char *);
 void displayPrompt(void);
 int checkin_path(char *buff, char *str);
