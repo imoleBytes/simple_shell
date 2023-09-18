@@ -45,7 +45,7 @@ int other_commands(char **args)
 	}
 	if (compare(args[0], "setenv") || compare(args[0], "unsetenv"))
 	{
-		printf("setenv and unset will be handled later\n");
+		/*printf("setenv and unset will be handled later\n");*/
 		return (1);
 	}
 	if (compare(args[0], "echo") && compare(args[1], "$$"))
