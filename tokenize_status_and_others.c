@@ -46,7 +46,7 @@ void comand_tokenize(char *command, char **args)
 		if (compare(token, "#") || *token == '#')
 		{
 			args[i] = NULL;
-			break;
+			return;
 		}
 		args[i] = token;
 		token = my_strtok(NULL, " ");
@@ -63,7 +63,7 @@ void comand_tokenize(char *command, char **args)
  */
 void process(char **args, char *command, char *orginal_command)
 {
-	char fullpath[1024];
+	char fullpath[10024];
 
 	comand_tokenize(command, args);
 	fullpath[0] = '\0';
@@ -72,6 +72,7 @@ void process(char **args, char *command, char *orginal_command)
 		if (args[1] != NULL)
 			get_status(is_digit(args[1]), 2);
 		(void)orginal_command;
+		free(command);
 		exit(get_status(0, 0));
 	}
 	if (!other_commands(args) && !path(args, fullpath))

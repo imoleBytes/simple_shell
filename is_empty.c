@@ -8,8 +8,6 @@ int check_empty(char *str1)
 {
 	char *str = str1;
 
-	if (compare(str, ""))
-		return (0);
 	while (*str != '\0')
 	{
 		if (*str != ' ' && *str != '\n')

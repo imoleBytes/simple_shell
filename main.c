@@ -11,20 +11,22 @@ void non_inter_active_mode(char *commands, char *command)
 	ssize_t actual_command_size = 0;
 	size_t max_command_size = 0;
 
-	actual_command_size = getline(&commands, &max_command_size, stdin);
+	actual_command_size = _getline(&commands, &max_command_size, stdin);
 	while (actual_command_size > -1)
 	{
 		if (!check_empty(commands))
 		{
 			free(commands);
+			commands = NULL;
 			continue;
 		}
 		_concat(command, commands, strlen(command));
 		free(commands);
 		commands = NULL;
-		actual_command_size = getline(&commands, &max_command_size, stdin);
+		actual_command_size = _getline(&commands, &max_command_size, stdin);
 	}
 	command[_strlen(command) - 1] = '\0';
+
 }
 /**
  * other_commands - function handles othe command
@@ -74,7 +76,10 @@ void handle_lines(char **args, char **lines, char *command)
 	for (j = 0; lines[j] != NULL; j++)
 	{
 		if (!check_empty(lines[j]))
+		{
+			free(lines[j]);
 			continue;
+		}
 		process(args, lines[j], command);
 		free(lines[j]);
 	}
@@ -91,7 +96,7 @@ void active_mode(char *commands, char *command)
 	ssize_t actual_command_size = 0;
 	size_t max_command_size = 0;
 
-	actual_command_size = getline(&commands, &max_command_size, stdin);
+	actual_command_size = _getline(&commands, &max_command_size, stdin);
 	if (actual_command_size > -1)
 	{
 		commands[actual_command_size] = '\0';
@@ -99,6 +104,7 @@ void active_mode(char *commands, char *command)
 		free(commands);
 		commands = NULL;
 	}
+
 }
 
 /**
