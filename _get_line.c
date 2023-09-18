@@ -14,7 +14,7 @@ ssize_t _getline(char **lptr, size_t *n, FILE *stream)
 {
 	static ssize_t word;
 	int i;
-	char *buffer, t = 'z';	
+	char *buffer, t = 'z';
 	ssize_t num_bytes;
 
 	if (word == 0)
