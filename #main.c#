@@ -47,7 +47,7 @@ int other_commands(char **args)
 		/*printf("setenv and unset will be handled later\n");*/
 		return (1);
 	}
-	if (compare(args[0], "echo") && compare(args[1], "$$"))
+	if (compare(compare(args[1], "$$"))
 	{
 		pid = getpid();
 		string_digit(pid, intonum);
@@ -62,12 +62,6 @@ int other_commands(char **args)
 		_concat(digit, "\n", _strlen(digit));
 		write(STDERR_FILENO, digit,  _strlen(digit));
 		return (1);
-	}
-	if (compare(args[0], "$$") || compare(args[0], "$?"))
-	{
-		pid = (compare(args[0], "$$")) ? getpid() : get_status(0, 0);
-		string_digit(pid, intonum);
-		args[0] = intonum;
 	}
 	return (0);
 }

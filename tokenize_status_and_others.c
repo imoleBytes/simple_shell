@@ -52,7 +52,6 @@ void comand_tokenize(char *command, char **args)
 		{
 			i++;
 			token = my_strtok(NULL, " ");
-			continue;
 		}
 		else
 			break;

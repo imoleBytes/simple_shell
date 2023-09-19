@@ -3,6 +3,25 @@
 #include <string.h>
 #include <string.h>
 #include "shell.h"
+
+
+/**
+* digit - function checks if string is digit
+* @str: string as paramater
+* Return: the digit in string or 0 if all not digit
+*/
+int digit(char *str)
+{
+	while (*str)
+	{
+		if (*str >= '0' && *str <= '9')
+			str++;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 /**
  * getVariable - function replaces variables
  * @args: array
@@ -14,6 +33,17 @@ int getVariable(char **args, char *var, int i)
 {
 	char **env = environ;
 	char *value;
+
+	if (digit(var))
+	{
+		args[i] = var;
+		return (1);
+	}
+	if (compare(var, "$$") || compare(var, "$?"))
+	{
+		args[i] = var;
+		return (1);
+	}
 
 	if (*var == '$' && _strlen(var) == 1)
 	{
@@ -33,16 +63,6 @@ int getVariable(char **args, char *var, int i)
 				return (1);
 			}
 		}
-	}
-	if (compare(var, "$$") || compare(var, "$?"))
-	{
-		args[i] = var;
-		return (1);
-	}
-	if (*var == '$' && _strlen(var) > 1)
-	{
-		args[i] = "abdi";
-		return (0);
 	}
 	args[i] = var;
 	return (1);
