@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * non_inter_active_mode - function
- * @commands: commands
- * @command: command
- */
+* non_inter_active_mode - function
+* @commands: commands
+* @command: command
+*/
 void non_inter_active_mode(char *commands, char *command)
 {
 	ssize_t actual_command_size = 0;
@@ -28,10 +28,10 @@ void non_inter_active_mode(char *commands, char *command)
 
 }
 /**
- * other_commands - function handles othe command
- * @args: array of arguments
- * Return: int
- */
+* other_commands - function handles othe command
+* @args: array of arguments
+* Return: int
+*/
 int other_commands(char **args)
 {
 	pid_t pid;
@@ -72,11 +72,11 @@ int other_commands(char **args)
 	return (0);
 }
 /**
- * handle_lines - function name
- * @command: str input
- * @lines: array to store lines
- * @args: array stores args
- */
+* handle_lines - function name
+* @command: str input
+* @lines: array to store lines
+* @args: array stores args
+*/
 void handle_lines(char **args, char **lines, char *command)
 {
 	int j;
@@ -94,10 +94,10 @@ void handle_lines(char **args, char **lines, char *command)
 }
 
 /**
- * active_mode - function
- * @commands: commands
- * @command: command
- */
+* active_mode - function
+* @commands: commands
+* @command: command
+*/
 
 void active_mode(char *commands, char *command)
 {

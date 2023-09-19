@@ -1,4 +1,0 @@
-echo "ls
-ls -l
-ls -a
-echo $?"

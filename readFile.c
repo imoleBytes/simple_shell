@@ -2,11 +2,11 @@
 
 
 /**
- * readFile - function reads file
- * @filename: string
- * @comand: string
- * Return: int
- */
+* readFile - function reads file
+* @filename: string
+* @comand: string
+* Return: int
+*/
 int readFile(char *filename, char **comand)
 {
 	int fd;
