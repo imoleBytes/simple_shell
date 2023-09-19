@@ -25,6 +25,8 @@ int _strlen(char *s)
  */
 void _concat(char *bf, char *str1, int  n)
 {
+	if (str1 == NULL)
+		return;
 	while (*str1 != '\0')
 	{
 		*(bf + n) = *str1;

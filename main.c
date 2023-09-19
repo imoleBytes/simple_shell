@@ -1,6 +1,5 @@
 #include "shell.h"
 
-
 /**
  * non_inter_active_mode - function
  * @commands: commands
@@ -36,7 +35,7 @@ void non_inter_active_mode(char *commands, char *command)
 int other_commands(char **args)
 {
 	pid_t pid;
-	char intonum[100], digit[100];
+	char intonum[10000], digit[1000];
 
 	if (compare(args[0], "cd"))
 	{
@@ -51,9 +50,10 @@ int other_commands(char **args)
 	if (compare(args[0], "echo") && compare(args[1], "$$"))
 	{
 		pid = getpid();
-		intToStr(intonum, pid, 10, 0);
-		_concat(args[1], intonum, 0);
-		return (0);
+		string_digit(pid, intonum);
+		_concat(intonum, "\n", _strlen(intonum));
+		write(STDOUT_FILENO, intonum, _strlen(intonum));
+		return (1);
 	}
 	if (compare(args[0], "echo") && compare(args[1], "$?"))
 	{
@@ -116,9 +116,9 @@ void active_mode(char *commands, char *command)
 
 int main(int argc, char *argv[])
 {
-	char command[1000] = "", *commands, *lines[1024];
+	char command[10000] = "", *commands, *lines[10024];
 	bool from_pipe = false;
-	char *args[1024]; /*maximum 1024 arguments*/
+	char *args[10024]; /*maximum 1024 arguments*/
 	ssize_t actual_command_size;
 
 	program_name(argv[0]);

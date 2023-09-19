@@ -34,14 +34,14 @@ int compare(char *s1, char *s2)
  */
 int path(char **args, char *fullpath)
 {
-	if (compare(args[0], "exit") || compare(args[0], "cd"))
+	if (compare(args[0], "exit"))
 		return (0);
 	if (access(args[0], X_OK) == 0)
 	{
 		_concat(fullpath, args[0], 0);
 		return (0);
 	}
-	if (!checkin_path(fullpath, args[0]))
+	if (!checkin_path(fullpath, args[0], "PATH="))
 	{
 		return (0);
 	}
@@ -56,14 +56,14 @@ int path(char **args, char *fullpath)
  * @str: the comand to look for
  * Return: 0 if found 1 if not found
  */
-int checkin_path(char *buff, char *str)
+int checkin_path(char *buff, char *str, char *variable)
 {
 	int i;
 	char *token, *path;
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		if (strncmp(environ[i], "PATH=", 5) == 0)
+		if (strncmp(environ[i], variable, 5) == 0)
 		{
 			path = strdup(environ[i] + 5);
 			token = my_strtok(path, ":");

@@ -48,9 +48,14 @@ void comand_tokenize(char *command, char **args)
 			args[i] = NULL;
 			return;
 		}
-		args[i] = token;
-		token = my_strtok(NULL, " ");
-		i++;
+		if (getVariable(args, token, i))
+		{
+			i++;
+			token = my_strtok(NULL, " ");
+			continue;
+		}
+		else
+			break;
 	}
 	args[i] = NULL;
 }

@@ -9,7 +9,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#define BUFSZE 10024
+#define BUFSZE 100024
+int getVariable(char **, char *, int);
 int other_commands(char **args);
 int tokenize_lines(char *str1, char **lines);
 int check_empty(char *str1);
@@ -23,7 +24,7 @@ void string_digit(int d, char *bf2);
 void _concat(char *bf, char *str1, int  n);
 int path(char **, char *);
 void displayPrompt(void);
-int checkin_path(char *buff, char *str);
+int checkin_path(char *buff, char *str, char*);
 void print_error(char **args);
 char *program_name(char *);
 int get_status(int, int);
@@ -41,8 +42,5 @@ void *_re_alloc(void *ptr, unsigned int newpt, unsigned int old);
 void mem_cpy(void *newptr, const void *ptr, unsigned int size);
 char *str_cpy(char *dest, char *src);
 int readFile(char *filename, char **comand);
-
-
-
 
 #endif
