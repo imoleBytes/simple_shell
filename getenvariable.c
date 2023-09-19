@@ -64,6 +64,11 @@ int getVariable(char **args, char *var, int i)
 			}
 		}
 	}
+	if (*var == '$')
+	{
+		args[i] = NULL;
+		return (0);
+	}
 	args[i] = var;
 	return (1);
 }
