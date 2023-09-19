@@ -26,7 +26,7 @@ char *_strdup(char *str);
 char *_strchr(char *s, char c);
 int path(char **, char *);
 void displayPrompt(void);
-int checkin_path(char *buff, char *str, char*);
+int checkin_path(char *buff, char *str);
 void print_error(char **args);
 char *program_name(char *);
 int get_status(int, int);

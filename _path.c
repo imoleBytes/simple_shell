@@ -41,7 +41,7 @@ int path(char **args, char *fullpath)
 		_concat(fullpath, args[0], 0);
 		return (0);
 	}
-	if (!checkin_path(fullpath, args[0], "PATH="))
+	if (!checkin_path(fullpath, args[0]))
 	{
 		return (0);
 	}
@@ -63,7 +63,7 @@ int checkin_path(char *buff, char *str)
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		if (strncmp(environ[i], variable, 5) == 0)
+		if (strncmp(environ[i], "PATH=", 5) == 0)
 		{
 			path = _strdup(environ[i] + 5);
 			token = my_strtok(path, ":");
