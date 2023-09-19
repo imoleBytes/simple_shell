@@ -28,6 +28,6 @@ int readFile(char *filename, char **comand)
 		return (0);
 	}
 	buff[bytes] = '\0';
-	*comand = strdup(buff);
+	*comand = _strdup(buff);
 	return (_strlen(*comand));
 }

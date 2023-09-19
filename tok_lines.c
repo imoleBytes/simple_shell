@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "shell.h"
 
 /**
@@ -55,13 +51,13 @@ int tokenize_lines(char *str1, char **lines)
 		lines[0] = NULL;
 		return (0);
 	}
-	str_copy = strdup(str);
+	str_copy = _strdup(str);
 	getlines(str, &dl);
 	token = my_strtok(str_copy, dl);
 	while (token != NULL)
 	{
 		str = str + _strlen(token) + 1;
-		lines[i] = strdup(token);
+		lines[i] = _strdup(token);
 		getlines(str, &dl);
 		token = my_strtok(NULL, dl);
 		i++;

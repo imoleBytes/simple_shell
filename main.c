@@ -19,7 +19,7 @@ void non_inter_active_mode(char *commands, char *command)
 			commands = NULL;
 			continue;
 		}
-		_concat(command, commands, strlen(command));
+		_concat(command, commands, _strlen(command));
 		free(commands);
 		commands = NULL;
 		actual_command_size = _getline(&commands, &max_command_size, stdin);
@@ -44,7 +44,7 @@ int other_commands(char **args)
 	}
 	if (compare(args[0], "setenv") || compare(args[0], "unsetenv"))
 	{
-		printf("setenv and unset will be handled later\n");
+		/*printf("setenv and unset will be handled later\n");*/
 		return (1);
 	}
 	if (compare(args[0], "echo") && compare(args[1], "$$"))

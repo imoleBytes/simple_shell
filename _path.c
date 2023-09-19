@@ -56,7 +56,7 @@ int path(char **args, char *fullpath)
  * @str: the comand to look for
  * Return: 0 if found 1 if not found
  */
-int checkin_path(char *buff, char *str, char *variable)
+int checkin_path(char *buff, char *str)
 {
 	int i;
 	char *token, *path;
@@ -65,7 +65,7 @@ int checkin_path(char *buff, char *str, char *variable)
 	{
 		if (strncmp(environ[i], variable, 5) == 0)
 		{
-			path = strdup(environ[i] + 5);
+			path = _strdup(environ[i] + 5);
 			token = my_strtok(path, ":");
 			while (token != NULL)
 			{
