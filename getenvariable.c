@@ -34,7 +34,7 @@ int getVariable(char **args, char *var, int i)
 	char **env = environ;
 	char *value;
 
-	if (digit(var))
+	if (digit(var) || compare(var, "-"))
 	{
 		args[i] = var;
 		return (1);
