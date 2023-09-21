@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
 	get_status(0, 0);
 	while (!from_pipe && 1)
 	{
-		if (isatty(STDIN_FILENO) == 0)
+		if (isatty(STDIN_FILENO) == 0 || argc >= 2)
 			from_pipe = true;
 		else
 			displayPrompt();
