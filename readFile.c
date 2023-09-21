@@ -25,7 +25,6 @@ int readFile(char *filename, char **comand)
 		_concat(err, filename, _strlen(err));
 		_concat(err, "\n", _strlen(err));
 		write(STDERR_FILENO, err, _strlen(err));
-		close(fd);
 		exit(127);
 	}
 	bytes = read(fd, buff, 1024);

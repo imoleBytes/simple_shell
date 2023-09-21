@@ -52,20 +52,20 @@ int getVariable(char **args, char *var, int i)
 		args[i] = var;
 		return (1);
 	}
-	for (; *env != NULL; env++)
-	{
-		if (strstr(*env, var + 1) == *env)
-		{
-			value = strchr(*env, '=');
-			if (value != NULL)
-			{
-				args[i] = value + 1;
-				return (1);
-			}
-		}
-	}
 	if (*var == '$')
 	{
+		for (; *env != NULL; env++)
+		{
+			if (strstr(*env, var + 1) == *env)
+			{
+				value = strchr(*env, '=');
+				if (value != NULL)
+				{
+					args[i] = value + 1;
+					return (1);
+				}
+			}
+		}
 		args[i] = NULL;
 		return (0);
 	}
