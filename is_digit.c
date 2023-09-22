@@ -7,7 +7,7 @@
 */
 int is_digit(char *str)
 {
-	char result, flag = 1;
+	int result = 0;
 	char *pr = program_name(NULL);
 	char err[1000];
 
@@ -26,5 +26,5 @@ int is_digit(char *str)
 		}
 		str++;
 	}
-	return (result * flag);
+	return (result);
 }

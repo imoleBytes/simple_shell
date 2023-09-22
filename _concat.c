@@ -44,7 +44,7 @@ void _concat(char *bf, char *str1, int  n)
 void string_digit(int d, char *bf2)
 {
 	int i = 0, n = 0;
-	char bf[1024];
+	char bf[10024];
 
 	while (d > 9)
 	{
